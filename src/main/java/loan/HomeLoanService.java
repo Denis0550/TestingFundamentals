@@ -13,7 +13,28 @@ public class HomeLoanService {
      * be granted. If there isn't enough balance, the request should be rejected.
      */
     public LoanApplication applyForHomeLoan(Account account, double propertyPrice) {
-        return null;
+        double percentage = propertyPrice >= 150_000 ? 0.20 : 0.15; // Ternary
+
+//        double percentage;
+//
+//        if (propertyPrice >= 150_000) {
+//            percentage = 0.20;
+//        } else {
+//            percentage = 0.15;
+//        }
+
+        double downPayment = propertyPrice * percentage;
+
+        boolean isGranted = account.getBalance() >= downPayment ? true : false;
+//        boolean isGranted;
+//
+//        if (account.getBalance() >= downPayment) {
+//            isGranted = true;
+//        } else {
+//            isGranted = false;
+//        }
+
+        return new LoanApplication(account, propertyPrice, isGranted);
     }
 
 }
